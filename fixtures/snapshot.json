@@ -1,0 +1,23 @@
+{
+  "config": {
+    "riskyRoleIds": ["RoleManagement.ReadWrite.Directory", "Policy.ReadWrite.ConditionalAccess", "AppRoleAssignment.ReadWrite.All"],
+    "allowedExcludedUserIds": ["user-allowed@example.org"],
+    "exceptionGroupNamePattern": "^exception-",
+    "exceptionGroups": [
+      {"id": "group-approved", "owner": "example-owner", "lastReviewedAt": "2026-01-01T00:00:00Z", "expiresAt": "2026-12-31T00:00:00Z"},
+      {"id": "group-unreviewed", "owner": "", "lastReviewedAt": "not-a-date", "expiresAt": "2025-12-31T00:00:00Z"}
+    ]
+  },
+  "applications": [
+    {"id": "app-good", "signInAudience": "singleTenant", "requestedRoles": [], "approvedRiskyRoleIds": [], "businessOwner": "example-owner", "lastReviewedAt": "2026-01-01T00:00:00Z", "credentials": [{"type": "certificate", "startDateTime": "2025-01-01T00:00:00Z", "endDateTime": "2027-01-01T00:00:00Z"}, {"type": "federation"}]},
+    {"id": "app-risky", "signInAudience": "multiTenant", "requestedRoles": ["RoleManagement.ReadWrite.Directory"], "approvedRiskyRoleIds": [], "businessOwner": "", "lastReviewedAt": "2024-01-01T00:00:00Z", "credentials": [{"type": "secret", "startDateTime": "2022-01-01T00:00:00Z", "endDateTime": "2025-01-01T00:00:00Z"}]},
+    {"id": "app-soon", "signInAudience": "singleTenant", "requestedRoles": [], "approvedRiskyRoleIds": [], "businessOwner": "example-owner", "lastReviewedAt": "2026-01-01T00:00:00Z", "credentials": [{"type": "secret", "startDateTime": "2025-01-20T00:00:00Z", "endDateTime": "2026-01-20T00:00:00Z"}]}
+  ],
+  "servicePrincipals": [
+    {"appId": "app-good", "servicePrincipalType": "Application", "accountEnabled": true, "decommissionedAt": null},
+    {"appId": "app-disabled", "servicePrincipalType": "Application", "accountEnabled": false, "decommissionedAt": null}
+  ],
+  "conditionalAccessPolicies": [
+    {"excludedUserIds": ["user-allowed@example.org", "user-unapproved@example.org"], "excludedGroups": [{"id": "group-approved", "displayName": "exception-sample"}, {"id": "group-unreviewed", "displayName": "other-sample"}]}
+  ]
+}

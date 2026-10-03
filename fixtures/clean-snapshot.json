@@ -1,0 +1,19 @@
+{
+  "config": {
+    "riskyRoleIds": ["RoleManagement.ReadWrite.Directory", "Policy.ReadWrite.ConditionalAccess", "AppRoleAssignment.ReadWrite.All"],
+    "allowedExcludedUserIds": ["user-allowed@example.org"],
+    "exceptionGroupNamePattern": "^exception-",
+    "exceptionGroups": [
+      {"id": "group-approved", "owner": "example-owner", "lastReviewedAt": "2026-01-01T00:00:00Z", "expiresAt": "2026-12-31T00:00:00Z"}
+    ]
+  },
+  "applications": [
+    {"id": "app-good", "signInAudience": "singleTenant", "requestedRoles": [], "approvedRiskyRoleIds": [], "businessOwner": "example-owner", "lastReviewedAt": "2026-01-01T00:00:00Z", "credentials": [{"type": "certificate", "startDateTime": "2025-01-01T00:00:00Z", "endDateTime": "2027-01-01T00:00:00Z"}, {"type": "federation"}]}
+  ],
+  "servicePrincipals": [
+    {"appId": "app-good", "servicePrincipalType": "Application", "accountEnabled": true, "decommissionedAt": null}
+  ],
+  "conditionalAccessPolicies": [
+    {"excludedUserIds": ["user-allowed@example.org"], "excludedGroups": [{"id": "group-approved", "displayName": "exception-sample"}]}
+  ]
+}

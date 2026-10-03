@@ -1,0 +1,17 @@
+# Only the explicitly fabricated fixtures belong in a public checkout.
+fixtures/*
+!fixtures/snapshot.json
+!fixtures/clean-snapshot.json
+!fixtures/example-results.json
+
+# Never stage tenant evidence or local credentials by accident.
+results/
+test-results/
+data/
+*.duckdb
+*.log
+.env*
+*.pfx
+*.p12
+*.pem
+*.key

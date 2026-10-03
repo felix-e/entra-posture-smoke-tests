@@ -1,0 +1,320 @@
+{
+  "simulated": true,
+  "illustrative": true,
+  "observed": false,
+  "asOf": "2026-01-15T00:00:00Z",
+  "results": [
+    {
+      "id": "MT.1002",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1027",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1038",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1055",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1068",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1069",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.5.1",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.5.2",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.5.3",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.5.4",
+      "domain": "app-lifecycle",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "LOCAL.PERM.001",
+      "domain": "app-lifecycle",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.PERM.002",
+      "domain": "app-lifecycle",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.PERM.003",
+      "domain": "app-lifecycle",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.OWNER.001",
+      "domain": "app-lifecycle",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.OWNER.002",
+      "domain": "app-lifecycle",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.OWNER.003",
+      "domain": "app-lifecycle",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "CISA.MS.AAD.1.1",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.3.1",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.6.1",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "CISA.MS.AAD.7.4",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1006",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1007",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1008",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1009",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1010",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1052",
+      "domain": "auth-credentials",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "LOCAL.CRED.001",
+      "domain": "auth-credentials",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.CRED.002",
+      "domain": "auth-credentials",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.CRED.003",
+      "domain": "auth-credentials",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.CRED.004",
+      "domain": "auth-credentials",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 2
+    },
+    {
+      "id": "MT.1003",
+      "domain": "ca-coverage-exclusions",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1004",
+      "domain": "ca-coverage-exclusions",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1005",
+      "domain": "ca-coverage-exclusions",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1020",
+      "domain": "ca-coverage-exclusions",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1035",
+      "domain": "ca-coverage-exclusions",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "MT.1036",
+      "domain": "ca-coverage-exclusions",
+      "origin": "upstream",
+      "status": "illustrative-not-evaluated",
+      "pass": null,
+      "count": null
+    },
+    {
+      "id": "LOCAL.CA.001",
+      "domain": "ca-coverage-exclusions",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.CA.002",
+      "domain": "ca-coverage-exclusions",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    },
+    {
+      "id": "LOCAL.CA.003",
+      "domain": "ca-coverage-exclusions",
+      "origin": "custom",
+      "status": "simulated-from-fixture",
+      "pass": false,
+      "count": 1
+    }
+  ]
+}

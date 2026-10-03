@@ -1,0 +1,19 @@
+{
+  "domains": [
+    {
+      "id": "app-lifecycle",
+      "upstream": ["MT.1002", "MT.1027", "MT.1038", "MT.1055", "MT.1068", "MT.1069", "CISA.MS.AAD.5.1", "CISA.MS.AAD.5.2", "CISA.MS.AAD.5.3", "CISA.MS.AAD.5.4"],
+      "custom": ["LOCAL.PERM.001", "LOCAL.PERM.002", "LOCAL.PERM.003", "LOCAL.OWNER.001", "LOCAL.OWNER.002", "LOCAL.OWNER.003"]
+    },
+    {
+      "id": "auth-credentials",
+      "upstream": ["CISA.MS.AAD.1.1", "CISA.MS.AAD.3.1", "CISA.MS.AAD.6.1", "CISA.MS.AAD.7.4", "MT.1006", "MT.1007", "MT.1008", "MT.1009", "MT.1010", "MT.1052"],
+      "custom": ["LOCAL.CRED.001", "LOCAL.CRED.002", "LOCAL.CRED.003", "LOCAL.CRED.004"]
+    },
+    {
+      "id": "ca-coverage-exclusions",
+      "upstream": ["MT.1003", "MT.1004", "MT.1005", "MT.1020", "MT.1035", "MT.1036"],
+      "custom": ["LOCAL.CA.001", "LOCAL.CA.002", "LOCAL.CA.003"]
+    }
+  ]
+}

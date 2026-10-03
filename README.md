@@ -4,27 +4,90 @@ Focused Entra posture monitoring: **curated Maester check IDs → local assertio
 
 ## Visual overview
 
-Start with business risks, then select [26 upstream check IDs and 13 local checks](MaesterTags.json). The resulting 39-check selection is reviewed by domain; each failure needs an owner and follow-up.
+```mermaid
+flowchart TD
+    Estate["Entra estate<br/>tenant data not included"]
 
-| Step | Where to look |
-| --- | --- |
-| Select checks | [Selection rationale](docs/MaesterTags.md) and [ID manifest](MaesterTags.json) |
-| Evaluate the 13 local checks offline | [Shared evaluator](src/PostureChecks.psm1) and [four named Pester files](maester-tests/Custom/README.md) |
-| Review and follow up | [Illustrative results](fixtures/example-results.json) and the operating loop below |
+    subgraph Select["1. Curate a small control set"]
+        direction LR
+        Tags["MaesterTags.json<br/>39 selected IDs"]
+        Domains["3 risk domains<br/>app lifecycle · auth/credentials · agents/NHI"]
+        Builtins["26 upstream check IDs<br/>Maester + CISA/Microsoft aligned"]
+        Custom["13 local checks<br/>owners · credentials · permissions · CA exceptions"]
+    end
 
-The three domains are application lifecycle and ownership, authentication and credentials, and **Agents and non-human identities**. Within that third grouping, the current nine selected IDs focus on Conditional Access coverage and exclusions, not direct MCP tests.
+    subgraph Run["2. Run local checks, not a broad sweep"]
+        direction LR
+        Runner["Supplied JSON snapshot<br/>no collector included"]
+        Stage["4 Custom/*.Tests.ps1 files<br/>13 named cases"]
+        Engine["PostureChecks.psm1<br/>offline PowerShell/Pester"]
+    end
+
+    subgraph Evidence["3. Review illustrative results"]
+        direction LR
+        Focused["example-results.json<br/>synthetic 39-ID illustration"]
+        Summary["13 local results<br/>from supplied snapshot"]
+        Native["Pester output<br/>13 local cases"]
+    end
+
+    subgraph Trend["4. Trend layer (not included)"]
+        direction LR
+        Ingest["Future ingestion<br/>real, reviewed results only"]
+        DB["Trend store<br/>not included"]
+        Views["History · comparison · domain trends<br/>not included"]
+    end
+
+    subgraph Action["5. Use it as an operating control"]
+        direction LR
+        Owners["assign owners after validation"]
+        Remediate["fix or approve exceptions"]
+        Audit["retain real audit evidence<br/>outside this repo"]
+    end
+
+    Estate -.->|approved collection, not included| Runner
+    Tags --> Stage
+    Domains --> Stage
+    Builtins -.->|IDs only, not evaluated here| Focused
+    Custom --> Stage
+    Runner --> Stage --> Engine
+    Tags --> Focused
+    Engine --> Summary
+    Engine --> Native
+    Summary -.->|future real-run ingestion| Ingest
+    Ingest -.-> DB -.-> Views
+    Views -.-> Owners
+    Views -.-> Remediate
+    Summary -.->|after a validated real run| Owners
+    Owners --> Remediate --> Audit
+```
+
+The three domains are application lifecycle and ownership, authentication and credentials, and **Agents and non-human identities**. Within that third grouping, the current nine selected IDs focus on Conditional Access coverage and exclusions, not direct MCP tests. Dotted paths are illustrative or require collection or trend tooling not shipped here; the included results are synthetic, not audit evidence.
 
 ## Repository shape
 
-| Path | Purpose |
-| --- | --- |
-| [MaesterTags.json](MaesterTags.json) | 39 selected IDs grouped by domain; not a Maester config file |
-| [src/PostureChecks.psm1](src/PostureChecks.psm1) | Shared offline implementation of the 13 local checks |
-| [maester-tests/README.md](maester-tests/README.md) | Maester usage and severity guidance |
-| [PERM tests](maester-tests/Custom/Test-Permissions.Tests.ps1), [OWNER tests](maester-tests/Custom/Test-Ownership.Tests.ps1), [CRED tests](maester-tests/Custom/Test-Credentials.Tests.ps1), [CA tests](maester-tests/Custom/Test-ConditionalAccess.Tests.ps1) | Four Pester files with visible local cases; all call the shared evaluator |
-| [fixtures/](fixtures/snapshot.json) | Fabricated snapshots and explicitly simulated results |
-| [tests/check-synthetic.ps1](tests/check-synthetic.ps1) | Local validation without a tenant connection |
-| [docs/MaesterTags.md](docs/MaesterTags.md) | Why each group is in the selected set |
+```text
+entra-posture-smoke-tests/
+├── README.md                              # visual entrypoint + operating story
+├── .gitignore                             # exclude future evidence and credentials
+├── MaesterTags.json                       # 39 selected IDs in 3 risk domains
+├── maester-tests/
+│   ├── README.md                          # Maester usage guidance
+│   └── Custom/                            # 13 local Pester cases
+│       ├── README.md                      # offline instructions
+│       ├── Test-Permissions.Tests.ps1     # 3 permissions cases
+│       ├── Test-Ownership.Tests.ps1       # 3 ownership cases
+│       ├── Test-Credentials.Tests.ps1     # 4 credential cases
+│       └── Test-ConditionalAccess.Tests.ps1  # 3 exclusion cases
+├── src/PostureChecks.psm1                 # shared offline evaluation logic
+├── fixtures/                              # synthetic examples only
+│   ├── snapshot.json                      # deliberate negative cases
+│   ├── clean-snapshot.json                # passing control
+│   └── example-results.json               # simulated 39-ID result
+├── tests/check-synthetic.ps1              # offline validation
+└── docs/MaesterTags.md                    # selection rationale
+```
+
+Browse the [four named custom-test files](maester-tests/Custom/) and their [shared evaluator](src/PostureChecks.psm1). The tree lists only files actually included in this public repo.
 
 The 26 built-in IDs refer to Maester/CISA checks. Their implementations are **not copied** into this repository. The 13 custom checks evaluate a supplied JSON snapshot. No collector, token, tenant configuration, upstream library snapshot, production report or analytics database is included. `.gitignore` admits only the three named synthetic fixtures under `fixtures/` and excludes common result, database and credential files; still review every commit.
 

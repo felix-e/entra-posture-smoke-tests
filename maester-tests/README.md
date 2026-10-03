@@ -1,8 +1,8 @@
 # Maester tests
 
-This directory contains **four local Pester files** for the 13 custom checks. Their case names are visible in GitHub; evaluation lives in the shared [PostureChecks.psm1](../src/PostureChecks.psm1) module. It does not bundle Maester's upstream test library. `MaesterTags.json` at the repository root lists 26 upstream IDs and 13 custom IDs; it is a selection reference, **not** a drop-in Maester configuration file.
+This directory contains **four local Pester files** for the 13 custom checks. Their case names are visible in GitHub; evaluation lives in the shared [PostureChecks.psm1](../src/PostureChecks.psm1) module. Empty `cis/`, `cisa/`, `EIDSCA/` and `Maester/` folders are tracked using `.gitkeep` placeholders, not upstream test files. It does not bundle Maester's upstream test library. `MaesterTags.json` at the repository root lists 26 upstream IDs and 13 custom IDs; it is a selection reference, **not** a drop-in Maester configuration file.
 
-In a separately installed Maester suite, tests may be organised into `Custom`, `CIS`, `CISA`, `EIDSCA` and `Maester` folders. See the [official Maester tests guide](https://maester.dev/docs/tests/) for those sources and their own update instructions. This repo provides [PERM](Custom/Test-Permissions.Tests.ps1), [OWNER](Custom/Test-Ownership.Tests.ps1), [CRED](Custom/Test-Credentials.Tests.ps1), and [CA](Custom/Test-ConditionalAccess.Tests.ps1) Pester files, which need an operator-supplied JSON snapshot and never connect to a tenant.
+In a separately installed Maester suite, tests may be organised into `Custom`, `cis`, `cisa`, `EIDSCA` and `Maester` folders. See the [official Maester tests guide](https://maester.dev/docs/tests/) for those sources and their own update instructions. This repo provides [PERM](Custom/Test-Permissions.Tests.ps1), [OWNER](Custom/Test-Ownership.Tests.ps1), [CRED](Custom/Test-Credentials.Tests.ps1), and [CA](Custom/Test-ConditionalAccess.Tests.ps1) Pester files, which need an operator-supplied JSON snapshot and never connect to a tenant.
 
 ## Running Maester
 

@@ -72,12 +72,16 @@ entra-posture-smoke-tests/
 ├── MaesterTags.json                       # 39 selected IDs in 3 risk domains
 ├── maester-tests/
 │   ├── README.md                          # Maester usage guidance
-│   └── Custom/                            # 13 local Pester cases
-│       ├── README.md                      # offline instructions
-│       ├── Test-Permissions.Tests.ps1     # 3 permissions cases
-│       ├── Test-Ownership.Tests.ps1       # 3 ownership cases
-│       ├── Test-Credentials.Tests.ps1     # 4 credential cases
-│       └── Test-ConditionalAccess.Tests.ps1  # 3 exclusion cases
+│   ├── Custom/                            # 13 local Pester cases
+│   │   ├── README.md                      # offline instructions
+│   │   ├── Test-Permissions.Tests.ps1     # 3 permissions cases
+│   │   ├── Test-Ownership.Tests.ps1       # 3 ownership cases
+│   │   ├── Test-Credentials.Tests.ps1     # 4 credential cases
+│   │   └── Test-ConditionalAccess.Tests.ps1  # 3 exclusion cases
+│   ├── cis/.gitkeep                       # empty upstream folder placeholder
+│   ├── cisa/.gitkeep                      # empty upstream folder placeholder
+│   ├── EIDSCA/.gitkeep                    # empty upstream folder placeholder
+│   └── Maester/.gitkeep                   # empty upstream folder placeholder
 ├── src/PostureChecks.psm1                 # shared offline evaluation logic
 ├── fixtures/                              # synthetic examples only
 │   ├── snapshot.json                      # deliberate negative cases
@@ -87,7 +91,7 @@ entra-posture-smoke-tests/
 └── docs/MaesterTags.md                    # selection rationale
 ```
 
-Browse the [four named custom-test files](maester-tests/Custom/) and their [shared evaluator](src/PostureChecks.psm1). The tree lists only files actually included in this public repo.
+Browse the [four named custom-test files](maester-tests/Custom/) and their [shared evaluator](src/PostureChecks.psm1). The tree lists only files actually included in this public repo. The `.gitkeep` files preserve empty Maester-style folders; no upstream tests are bundled.
 
 The 26 built-in IDs refer to Maester/CISA checks. Their implementations are **not copied** into this repository. The 13 custom checks evaluate a supplied JSON snapshot. No collector, token, tenant configuration, upstream library snapshot, production report or analytics database is included. `.gitignore` admits only the three named synthetic fixtures under `fixtures/` and excludes common result, database and credential files; still review every commit.
 

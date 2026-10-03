@@ -46,7 +46,7 @@ The first ten entries reference existing checks. The six local rules need a poli
 
 The local checks operate on an exported snapshot. A federated identity credential is an alternative, not a certificate with a fictitious expiry date.
 
-## Conditional Access coverage and exclusions (9 checks)
+## Agents and non-human identities (9 checks)
 
 | ID | Why it is in the selection |
 | --- | --- |
@@ -60,11 +60,11 @@ The local checks operate on an exported snapshot. A federated identity credentia
 | LOCAL.CA.002 | Excluded groups outside the configured naming rule |
 | LOCAL.CA.003 | Excluded groups missing owner, recent review or future expiry |
 
-These nine concern Conditional Access, including paths that may affect workloads and agents. **They do not test agent ownership, MCP tool approval or agent authentication.** A group name is an operator cue, not evidence that its exclusion was approved.
+The current nine selected IDs in this intentional grouping focus on Conditional Access coverage and exclusions, including paths that may affect workloads and agents. They are not direct MCP tests. A group name is an operator cue, not evidence that its exclusion was approved.
 
 ## Deliberately outside this reference
 
-A full catalogue run, broad user-by-user sweeps, tenant-scale extracts, upstream test source, Graph credentials, real findings and historical trend databases are not included. A direct agent/MCP posture suite would be a separate scope with new tests and evidence. Adding its label to a Conditional Access list would not do the work.
+A full catalogue run, broad user-by-user sweeps, tenant-scale extracts, upstream test source, Graph credentials, real findings and historical trend databases are not included. Direct agent/MCP posture tests would require new tests and evidence beyond this selection.
 
 ## Notes on use
 

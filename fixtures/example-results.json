@@ -246,7 +246,7 @@
     },
     {
       "id": "MT.1003",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "upstream",
       "status": "illustrative-not-evaluated",
       "pass": null,
@@ -254,7 +254,7 @@
     },
     {
       "id": "MT.1004",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "upstream",
       "status": "illustrative-not-evaluated",
       "pass": null,
@@ -262,7 +262,7 @@
     },
     {
       "id": "MT.1005",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "upstream",
       "status": "illustrative-not-evaluated",
       "pass": null,
@@ -270,7 +270,7 @@
     },
     {
       "id": "MT.1020",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "upstream",
       "status": "illustrative-not-evaluated",
       "pass": null,
@@ -278,7 +278,7 @@
     },
     {
       "id": "MT.1035",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "upstream",
       "status": "illustrative-not-evaluated",
       "pass": null,
@@ -286,7 +286,7 @@
     },
     {
       "id": "MT.1036",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "upstream",
       "status": "illustrative-not-evaluated",
       "pass": null,
@@ -294,7 +294,7 @@
     },
     {
       "id": "LOCAL.CA.001",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "custom",
       "status": "simulated-from-fixture",
       "pass": false,
@@ -302,7 +302,7 @@
     },
     {
       "id": "LOCAL.CA.002",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "custom",
       "status": "simulated-from-fixture",
       "pass": false,
@@ -310,7 +310,7 @@
     },
     {
       "id": "LOCAL.CA.003",
-      "domain": "ca-coverage-exclusions",
+      "domain": "agents-nhi",
       "origin": "custom",
       "status": "simulated-from-fixture",
       "pass": false,

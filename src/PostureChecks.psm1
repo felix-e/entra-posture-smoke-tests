@@ -129,7 +129,7 @@ function Test-PostureChecks {
         @('LOCAL.PERM.001','app-lifecycle'),@('LOCAL.PERM.002','app-lifecycle'),@('LOCAL.PERM.003','app-lifecycle'),
         @('LOCAL.OWNER.001','app-lifecycle'),@('LOCAL.OWNER.002','app-lifecycle'),@('LOCAL.OWNER.003','app-lifecycle'),
         @('LOCAL.CRED.001','auth-credentials'),@('LOCAL.CRED.002','auth-credentials'),@('LOCAL.CRED.003','auth-credentials'),@('LOCAL.CRED.004','auth-credentials'),
-        @('LOCAL.CA.001','ca-coverage-exclusions'),@('LOCAL.CA.002','ca-coverage-exclusions'),@('LOCAL.CA.003','ca-coverage-exclusions')
+        @('LOCAL.CA.001','agents-nhi'),@('LOCAL.CA.002','agents-nhi'),@('LOCAL.CA.003','agents-nhi')
     )) { AddResult $item[0] $item[1] $counts[$item[0]] }
 }
 Export-ModuleMember -Function Test-PostureChecks

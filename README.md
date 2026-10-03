@@ -4,29 +4,27 @@ Focused Entra posture monitoring: **curated Maester check IDs → local assertio
 
 ## Visual overview
 
-```mermaid
-flowchart LR
-    A[Choose business risks] --> B[26 upstream check IDs]
-    A --> C[13 local checks]
-    B --> D[39-check selection]
-    C --> D
-    D --> E[Review results by domain]
-    E --> F[Assign owner and follow-up]
-```
+Start with business risks, then select [26 upstream check IDs and 13 local checks](MaesterTags.json). The resulting 39-check selection is reviewed by domain; each failure needs an owner and follow-up.
 
-The three domains are application lifecycle and ownership, authentication and credentials, and **Conditional Access coverage and exclusions**. The third domain is relevant to non-human identities but contains **no direct MCP or agent checks**.
+| Step | Where to look |
+| --- | --- |
+| Select checks | [Selection rationale](docs/MaesterTags.md) and [ID manifest](MaesterTags.json) |
+| Evaluate the 13 local checks offline | [Shared evaluator](src/PostureChecks.psm1) and [four named Pester files](maester-tests/Custom/README.md) |
+| Review and follow up | [Illustrative results](fixtures/example-results.json) and the operating loop below |
+
+The three domains are application lifecycle and ownership, authentication and credentials, and **Agents and non-human identities**. Within that third grouping, the current nine selected IDs focus on Conditional Access coverage and exclusions, not direct MCP tests.
 
 ## Repository shape
 
-```text
-MaesterTags.json                  39 selected IDs grouped by domain (not a Maester config file)
-src/PostureChecks.psm1           13 clean-room, offline custom checks
-maester-tests/README.md          Maester usage and severity guidance
-maester-tests/Custom/            Pester adapter plus custom-test guidance
-fixtures/                        Fabricated snapshots and explicitly simulated results
-tests/check-synthetic.ps1        Local validation without a tenant connection
-docs/MaesterTags.md              Why each group is in the selected set
-```
+| Path | Purpose |
+| --- | --- |
+| [MaesterTags.json](MaesterTags.json) | 39 selected IDs grouped by domain; not a Maester config file |
+| [src/PostureChecks.psm1](src/PostureChecks.psm1) | Shared offline implementation of the 13 local checks |
+| [maester-tests/README.md](maester-tests/README.md) | Maester usage and severity guidance |
+| [PERM tests](maester-tests/Custom/Test-Permissions.Tests.ps1), [OWNER tests](maester-tests/Custom/Test-Ownership.Tests.ps1), [CRED tests](maester-tests/Custom/Test-Credentials.Tests.ps1), [CA tests](maester-tests/Custom/Test-ConditionalAccess.Tests.ps1) | Four Pester files with visible local cases; all call the shared evaluator |
+| [fixtures/](fixtures/snapshot.json) | Fabricated snapshots and explicitly simulated results |
+| [tests/check-synthetic.ps1](tests/check-synthetic.ps1) | Local validation without a tenant connection |
+| [docs/MaesterTags.md](docs/MaesterTags.md) | Why each group is in the selected set |
 
 The 26 built-in IDs refer to Maester/CISA checks. Their implementations are **not copied** into this repository. The 13 custom checks evaluate a supplied JSON snapshot. No collector, token, tenant configuration, upstream library snapshot, production report or analytics database is included. `.gitignore` admits only the three named synthetic fixtures under `fixtures/` and excludes common result, database and credential files; still review every commit.
 
@@ -36,7 +34,7 @@ The 26 built-in IDs refer to Maester/CISA checks. Their implementations are **no
 | --- | ---: | ---: | ---: |
 | Application lifecycle and ownership | 16 | 10 | 6 |
 | Authentication and credentials | 14 | 10 | 4 |
-| Conditional Access coverage and exclusions | 9 | 6 | 3 |
+| Agents and non-human identities | 9 | 6 | 3 |
 | **Total** | **39** | **26** | **13** |
 
 In one earlier selected lab run, the 39 checks took **about two and a half minutes** (~147 seconds wall time). That is historical context, **not** a runtime measurement of this repo, a production assurance claim or proof of a nightly scheduler. A check that takes three coffees and a change window rarely becomes routine.
@@ -57,7 +55,7 @@ The original operating pattern was to fetch relevant inventory once, cache it, t
 
 `fixtures/example-results.json` contains **synthetic, illustrative data** for all 39 IDs. Its 26 upstream entries are marked `illustrative-not-evaluated`; the 13 local entries match the fabricated snapshot at its fixed sample clock. They are **not** a real Maester result and must not be presented as one.
 
-The offline module returns an ID, domain, pass/fail flag and violation count per local check. The optional Pester adapter reports the same 13 checks against a reviewed snapshot. In a real operating environment, retain timestamped results, collection context and an owner for each failure; do not publish those outputs here.
+The offline module returns an ID, domain, pass/fail flag and violation count per local check. The four optional Pester files report the same 13 checks against a reviewed snapshot using the shared evaluator. In a real operating environment, retain timestamped results, collection context and an owner for each failure; do not publish those outputs here.
 
 ## Trend layer
 
@@ -79,7 +77,7 @@ Requires PowerShell 7; the Pester adapter additionally requires Pester. These co
 pwsh -NoProfile -File ./tests/check-synthetic.ps1
 $env:POSTURE_SNAPSHOT_PATH = (Resolve-Path ./fixtures/clean-snapshot.json).Path
 $env:POSTURE_NOW = '2026-01-15T00:00:00Z'
-Invoke-Pester -Path ./maester-tests/Custom/Test-PostureSnapshot.Tests.ps1
+Invoke-Pester -Path ./maester-tests/Custom
 ```
 
 `fixtures/snapshot.json` intentionally contains failures; `fixtures/clean-snapshot.json` is the passing control. `fixtures/example-results.json` shows the simulated 39-entry result. `POSTURE_NOW` fixes the clock for reproducibility; omit it only when evaluating a real, approved snapshot. Running the 26 upstream checks separately requires Maester and its source tests; this manifest alone does not execute them. See [Maester's test documentation](https://maester.dev/docs/tests/) and [the custom-test README](maester-tests/Custom/README.md).

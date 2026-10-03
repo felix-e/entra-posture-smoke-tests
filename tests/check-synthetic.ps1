@@ -5,7 +5,7 @@ $manifest = Get-Content (Join-Path $root 'MaesterTags.json') -Raw | ConvertFrom-
 $snapshot = Get-Content (Join-Path $root 'fixtures/snapshot.json') -Raw | ConvertFrom-Json -AsHashtable
 $now = [datetimeoffset]::Parse('2026-01-15T00:00:00Z')
 function Assert($condition, $message) { if (-not $condition) { throw $message } }
-$expectedDomains = @('app-lifecycle','auth-credentials','ca-coverage-exclusions')
+$expectedDomains = @('app-lifecycle','auth-credentials','agents-nhi')
 $expectedTotals = @(16,14,9)
 $allIds = @()
 for ($i = 0; $i -lt 3; $i++) {
@@ -20,6 +20,25 @@ $custom = @($manifest.domains | ForEach-Object { $_.custom })
 Assert ($custom.Count -eq 13) 'Wrong custom count'
 $expectedCustom = @('LOCAL.PERM.001','LOCAL.PERM.002','LOCAL.PERM.003','LOCAL.OWNER.001','LOCAL.OWNER.002','LOCAL.OWNER.003','LOCAL.CRED.001','LOCAL.CRED.002','LOCAL.CRED.003','LOCAL.CRED.004','LOCAL.CA.001','LOCAL.CA.002','LOCAL.CA.003')
 Assert ((@($custom | Sort-Object) -join ',') -ceq (@($expectedCustom | Sort-Object) -join ',')) 'Unexpected custom IDs'
+$caseFiles = @{
+    'Test-Permissions.Tests.ps1' = @('LOCAL.PERM.001','LOCAL.PERM.002','LOCAL.PERM.003')
+    'Test-Ownership.Tests.ps1' = @('LOCAL.OWNER.001','LOCAL.OWNER.002','LOCAL.OWNER.003')
+    'Test-Credentials.Tests.ps1' = @('LOCAL.CRED.001','LOCAL.CRED.002','LOCAL.CRED.003','LOCAL.CRED.004')
+    'Test-ConditionalAccess.Tests.ps1' = @('LOCAL.CA.001','LOCAL.CA.002','LOCAL.CA.003')
+}
+$files = @(Get-ChildItem (Join-Path $root 'maester-tests/Custom') -Filter '*.Tests.ps1' -File)
+Assert ($files.Count -eq 4) 'Expected exactly four Pester files'
+Assert ((@($files.Name | Sort-Object) -join ',') -ceq (@($caseFiles.Keys | Sort-Object) -join ',')) 'Unexpected Pester file names'
+$caseIds = @()
+foreach ($file in $files) {
+    $source = Get-Content $file.FullName -Raw
+    $ids = @([regex]::Matches($source, "\bid\s*=\s*'(LOCAL\.[A-Z]+\.\d{3})'") | ForEach-Object { $_.Groups[1].Value })
+    Assert ((@($ids | Sort-Object) -join ',') -ceq (@($caseFiles[$file.Name] | Sort-Object) -join ',')) "Wrong cases in $($file.Name)"
+    Assert ($source.Contains('Test-PostureChecks -Snapshot')) "File does not call shared evaluator: $($file.Name)"
+    $caseIds += $ids
+}
+Assert ($caseIds.Count -eq 13 -and @($caseIds | Select-Object -Unique).Count -eq 13) 'Pester cases must cover 13 distinct IDs'
+Assert ((@($caseIds | Sort-Object) -join ',') -ceq (@($custom | Sort-Object) -join ',')) 'Pester cases differ from manifest'
 $baseline = @(Test-PostureChecks -Snapshot $snapshot -Now $now)
 Assert ($baseline.Count -eq 13) 'Expected 13 checks'
 Assert ((@($baseline.id | Sort-Object) -join ',') -ceq (@($custom | Sort-Object) -join ',')) 'Custom IDs differ from manifest'
@@ -74,4 +93,4 @@ foreach ($check in $baseline) {
     $entry = @($sample.results | Where-Object { $_.id -ceq $check.id })
     Assert ($entry.Count -eq 1 -and $entry[0].domain -ceq $check.domain -and $entry[0].pass -eq $check.pass -and $entry[0].count -eq $check.count) "Sample differs from evaluator: $($check.id)"
 }
-'PASS: 39 manifest/sample IDs, 13 checks, clean control, nine negative controls'
+'PASS: 39 manifest/sample IDs, 4 Pester files with 13 unique cases, 13 checks, clean control, nine negative controls'
